@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default" *ngIf="isLoggedIn()">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/home">School</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/users">Users</a></li>
+        <li><a routerLink="/events">Events</a></li>
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <div class="btn-group" dropdown>
+            <a dropdownToggle class="dropdown-toggle profile-dropdown">{{getUserName()}}<span class="caret"></span></a>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem"><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem" (click)="logOut()"><a class="dropdown-item">LogOut</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

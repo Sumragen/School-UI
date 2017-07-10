@@ -1,0 +1,18 @@
+app-root{
+  position: relative;
+}
+.text-center {
+  text-align: center;
+}
+
+.main-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.main-container{
+  padding-left: 200px;
+  padding-right: 200px;
+}

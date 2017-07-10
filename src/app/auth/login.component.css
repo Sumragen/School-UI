@@ -1,0 +1,12 @@
+.container {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  max-width: 400px;
+}
+
+.form-header {
+  text-align: center;
+}

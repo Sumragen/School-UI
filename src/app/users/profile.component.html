@@ -1,0 +1,9 @@
+<h1>
+  <span *ngIf="isMyProfile()">My </span>Profile
+</h1>
+<div *ngIf="!!user">
+  login: {{user.username}}
+  <div>
+    {{user.firstName}} {{user.lastName}}
+  </div>
+</div>

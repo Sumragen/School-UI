@@ -20,4 +20,8 @@ export class SecurityContextService {
       : localStorage.removeItem('currentUser');
     return user;
   }
+
+  removePrincipal(): void {
+    localStorage.removeItem('currentUser');
+  }
 }

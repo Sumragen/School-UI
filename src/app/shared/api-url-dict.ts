@@ -19,6 +19,13 @@ export class ApiUrlDict {
     }
   };
 
+  register(): object {
+    return {
+      url: '/user/add',
+      method: METHODS.POST
+    }
+  };
+
   getUsers(): object {
     return {
       url: '/users',

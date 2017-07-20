@@ -12,6 +12,7 @@ import {ApiService} from '../shared/api.service';
 import {ApiResolverService} from '../shared/api-resolver.service';
 
 import {LoginDto} from './login-dto.model';
+import {RegisterDto} from './register-dto.model';
 
 @Injectable()
 export class AuthService {
@@ -36,8 +37,18 @@ export class AuthService {
         error => console.log(error))
   }
 
+  signUp(data: RegisterDto): void {
+    const endpoint = this.apiResolverService.get('register', {body: data});
+    this.apiService.request(endpoint.url, endpoint.request)
+      .map(response => response.json())
+      .subscribe(response => {
+        this.router.navigate(['/'])
+          .catch(err => console.log(err));
+      })
+  }
+
   logOut(): void {
-    this.securityContext.setPrincipal(null);
+    this.securityContext.removePrincipal();
     this.router.navigate(['/'])
       .catch(err => console.log(err));
   }

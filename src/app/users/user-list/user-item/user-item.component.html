@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-4">
+    <a href="#">
+      <img class="img-responsive" [src]="user.avatar || 'http://placehold.it/400x300'" alt="">
+    </a>
+  </div>
+  <div class="col-md-8">
+    <h3>{{user.firstName}} {{user.lastName}}</h3>
+    <h4>{{user.username}}</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at
+      voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet
+      unde.</p>
+    <a
+      class="btn btn-primary"
+      [routerLink]="['/users', user.id]"
+    >View Detail <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
+<hr>

@@ -16,3 +16,7 @@ app-root{
   padding-left: 200px;
   padding-right: 200px;
 }
+.bg{
+  height: 100vh;
+  background-color: #f2f2f2;
+}

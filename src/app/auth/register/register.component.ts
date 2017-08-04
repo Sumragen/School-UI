@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
-import {emailValidator} from '../email-validator.directive';
-import {passwordValidator} from '../password-validator.directive';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -11,13 +10,6 @@ import {passwordValidator} from '../password-validator.directive';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  formErrors = {
-    username: '',
-    password: '',
-    first_name: '',
-    last_name: '',
-    email: ''
-  };
   validationMessages = {
     username: {
       required: 'Username is required.',
@@ -28,7 +20,7 @@ export class RegisterComponent implements OnInit {
       required: 'Password is required.',
       minlength: 'minLength validation',
       maxlength: 'maxLength validation',
-      incorrectPassword: 'Incorrect password'
+      passwordIncorrect: 'Incorrect password'
     },
     first_name: {
       required: 'First name is required.',
@@ -42,50 +34,25 @@ export class RegisterComponent implements OnInit {
     },
     email: {
       required: 'Email is required.',
-      incorrectEmail: 'Please, set correct Email'
+      email: 'Please, set correct Email'
     },
   };
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.createRegisterForm();
-    this.registerForm.valueChanges.subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged();
   }
 
   ngOnInit() {
   }
 
   createRegisterForm(): void {
-    this.registerForm = this.fb.group({
-      username: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(36)])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(36), passwordValidator()])],
-      first_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(36)])],
-      last_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(36)])],
-      email: ['', Validators.compose([Validators.required, emailValidator()])]
+    this.registerForm = new FormGroup({
+      username: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(36)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(36), this.passwordCheck]),
+      first_name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]),
+      last_name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]),
+      email: new FormControl(null, [Validators.required, Validators.email])
     });
-  }
-
-  onValueChanged(data?: any) {
-    if (!this.registerForm) {
-      return;
-    }
-    const form = this.registerForm;
-
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (this.formErrors.hasOwnProperty(field)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
   }
 
   signUp(): void {
@@ -94,4 +61,11 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  passwordCheck(control: FormControl): { [s: string]: boolean } {
+    const checkRegEx = /^(?=.*?[A-Z])(?=.*?[a-z]).{8,}$/;
+    if (!checkRegEx.test(control.value)) {
+      return {'passwordIncorrect': true};
+    }
+    return null;
+  }
 }

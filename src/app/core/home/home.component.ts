@@ -3,10 +3,13 @@
  */
 import {Component} from '@angular/core';
 
+import { fadeInAnimation } from '../../shared/animations/fade-in.animation'
+
 @Component({
   selector: 'app-home-page',
   styles: [],
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  animations: [fadeInAnimation]
 })
 export class HomeComponent {
 

@@ -7,8 +7,16 @@
       <input type="text" id="first_name" class="form-control"
              formControlName="first_name" required>
 
-      <div *ngIf="formErrors.first_name" class="help-block">
-        {{ formErrors.first_name }}
+      <div *ngIf="registerForm.get('first_name').invalid && registerForm.get('first_name').touched" class="help-block">
+        <span *ngIf="registerForm.get('first_name').errors['required']">
+          {{ validationMessages.first_name.required }}
+        </span>
+        <span *ngIf="registerForm.get('first_name').errors['minlength']">
+          {{ validationMessages.first_name.minlength }}
+        </span>
+        <span *ngIf="registerForm.get('first_name').errors['maxlength']">
+          {{ validationMessages.first_name.maxlength }}
+        </span>
       </div>
     </div>
     <div class="form-group">
@@ -17,8 +25,16 @@
       <input type="text" id="last_name" class="form-control"
              formControlName="last_name" required>
 
-      <div *ngIf="formErrors.last_name" class="help-block">
-        {{ formErrors.last_name }}
+      <div *ngIf="registerForm.get('last_name').invalid && registerForm.get('last_name').touched" class="help-block">
+        <span *ngIf="registerForm.get('last_name').errors['required']">
+          {{ validationMessages.last_name.required }}
+        </span>
+        <span *ngIf="registerForm.get('last_name').errors['minlength']">
+          {{ validationMessages.last_name.minlength }}
+        </span>
+        <span *ngIf="registerForm.get('last_name').errors['maxlength']">
+          {{ validationMessages.last_name.maxlength }}
+        </span>
       </div>
     </div>
     <div class="form-group">
@@ -27,15 +43,35 @@
       <input type="text" id="username" class="form-control"
              formControlName="username" required>
 
-      <div *ngIf="formErrors.username" class="help-block">
-        {{ formErrors.username }}
+      <div *ngIf="registerForm.get('username').invalid && registerForm.get('username').touched" class="help-block">
+        <span *ngIf="registerForm.get('username').errors['required']">
+          {{ validationMessages.username.required }}
+        </span>
+        <span *ngIf="registerForm.get('username').errors['minlength']">
+          {{ validationMessages.username.minlength }}
+        </span>
+        <span *ngIf="registerForm.get('username').errors['maxlength']">
+          {{ validationMessages.username.maxlength }}
+        </span>
       </div>
     </div>
     <div class="form-group">
       <label for="password">Password<span class="red-color">*</span></label>
       <input type="password" id="password" title="password" class="form-control" formControlName="password"/>
-      <div *ngIf="formErrors.password" class="help-block">
-        {{ formErrors.password }}
+
+      <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched" class="help-block">
+        <span *ngIf="registerForm.get('password').errors['required']">
+          {{ validationMessages.password.required }}
+        </span>
+        <span *ngIf="registerForm.get('password').errors['minlength']">
+          {{ validationMessages.password.minlength }}
+        </span>
+        <span *ngIf="registerForm.get('password').errors['maxlength']">
+          {{ validationMessages.password.maxlength }}
+        </span>
+        <span *ngIf="registerForm.get('password').errors['passwordIncorrect']">
+          {{ validationMessages.password.passwordIncorrect }}
+        </span>
       </div>
     </div>
     <div class="form-group">
@@ -44,8 +80,13 @@
       <input type="text" id="email" class="form-control"
              formControlName="email" required>
 
-      <div *ngIf="formErrors.email" class="help-block">
-        {{ formErrors.email }}
+      <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched" class="help-block">
+        <span *ngIf="registerForm.get('email').errors['required']">
+          {{ validationMessages.email.required }}
+        </span>
+        <span *ngIf="registerForm.get('email').errors['email']">
+          {{ validationMessages.email.email }}
+        </span>
       </div>
     </div>
 

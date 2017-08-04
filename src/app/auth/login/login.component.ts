@@ -6,7 +6,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../auth.service';
 
-import {emailValidator} from '../email-validator.directive'
 import {LoginDto} from '../login-dto.model';
 
 @Component({
@@ -17,12 +16,10 @@ import {LoginDto} from '../login-dto.model';
 
 export class LoginComponent {
   user: LoginDto;
-  loginForm: FormGroup;
-
-  formErrors = {
-    'username': '',
-    'password': ''
-  };
+  loginForm: FormGroup = this.fb.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  });
 
   validationMessages = {
     'username': {
@@ -33,54 +30,9 @@ export class LoginComponent {
     }
   };
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.createLoginForm();
-    this.loginForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged();
-  }
-
-  createLoginForm() {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    })
-  }
-
-
-  onValueChanged(data?: any) {
-    if (!this.loginForm) {
-      return;
-    }
-    const form = this.loginForm;
-
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (this.formErrors.hasOwnProperty(field)) {
-              this.formErrors[field] += messages[key] + ' ';
-
-            }
-          }
-        }
-      }
-    }
-  }
+  constructor(private authService: AuthService, private fb: FormBuilder) { }
 
   signIn(): void {
-    if (this.loginForm.valid) {
-      this.authService.signIn(this.loginForm.value);
-    }
-  }
-
-  isValueValid(propName: string): boolean {
-    return this.loginForm.get(propName).valid;
+    this.authService.signIn(this.loginForm.value);
   }
 }

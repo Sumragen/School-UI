@@ -1,0 +1,18 @@
+.profile-avatar-wrapper {
+  background-color: #fff;
+  max-width: 150px;
+  width: 150px;
+}
+
+.profile-avatar-box {
+  max-width: 150px;
+  width: 150px;
+}
+
+.profile-avatar-info-box {
+  padding: 10px 10px 5px 10px;
+}
+
+.profile-item {
+  display: inline-block;
+}

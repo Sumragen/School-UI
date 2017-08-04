@@ -1,0 +1,40 @@
+<div class="container" [@fadeInAnimation] *ngIf="user">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <button class="btn btn-link" (click)="goBack()">
+          <span class="glyphicon glyphicon-chevron-left"></span> Back
+        </button>
+        {{user.firstName}} {{user.lastName}}
+      </h1>
+    </div>
+  </div>
+
+  <div class="col-sm-8 col-md-12">
+    <div class="col-sm-2">
+      <!--profile avatar-->
+      <div class="row profile-item">
+        <div class="profile-avatar-wrapper">
+          <div class="profile-avatar-box">
+            <img class="img-responsive"
+                 [src]="user.avatar || 'https://d3txbfmby5lf7l.cloudfront.net/assets/default-user-avatar-57012e2942.svg'"
+                 alt="{{user.username}}">
+            <div class="profile-avatar-info-box">
+              <p>
+                Size: some_size
+              </p>
+              <p>
+                Type: some_type
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="profile-item">
+        <app-user-edit></app-user-edit>
+      </div>
+    </div>
+  </div>
+</div>

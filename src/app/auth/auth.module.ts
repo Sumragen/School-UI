@@ -11,13 +11,24 @@ import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {AuthService} from './auth.service';
-import {EmailValidatorDirective} from './email-validator.directive'
-import {PasswordValidatorDirective} from './password-validator.directive';
+import {AuthRoutingModule} from './auth-routing.module';
+import {ApiUrlDict} from '../shared/api-url-dict';
+import {ApiResolverService} from '../shared/api-resolver.service';
+import {ApiService} from '../shared/api.service';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, EmailValidatorDirective, PasswordValidatorDirective],
-  imports: [FormsModule, RouterModule, ReactiveFormsModule, BrowserModule],
-  providers: [AuthService]
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+  ],
+  imports: [
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    AuthRoutingModule
+  ],
+  providers: [AuthService, ApiUrlDict, ApiResolverService, ApiService]
 })
 
 export class AuthModule {

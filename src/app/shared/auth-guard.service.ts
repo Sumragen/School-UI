@@ -13,7 +13,6 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate() {
-    console.log('AuthGuard');
     return !!this.securityContext.getPrincipal();
   }
 }

@@ -2,3 +2,14 @@
   width: 100vh;
   height: 100vh;
 }
+.control-input{
+  display: inline-block !important;
+  width: 30%;
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid #a90000;
+}
+
+.help-block span {
+  color: #a90000;
+}

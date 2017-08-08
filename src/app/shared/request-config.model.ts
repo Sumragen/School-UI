@@ -3,6 +3,6 @@
  */
 export class RequestConfig {
   body?: object;
-  params?: object[];
+  urlParams?: object[];
   endpointParams?: any[];
 }

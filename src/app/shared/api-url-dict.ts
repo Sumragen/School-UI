@@ -38,5 +38,12 @@ export class ApiUrlDict {
       method: METHODS.GET,
       url: '/user/' + id
     }
+  };
+
+  updateUser(id: string): object {
+    return {
+      method: METHODS.PUT,
+      url: '/user/' + id
+    }
   }
 }

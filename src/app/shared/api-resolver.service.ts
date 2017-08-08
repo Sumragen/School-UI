@@ -30,7 +30,7 @@ export class ApiResolverService {
     return url;
   }
 
-  get(apiName: string, conf?: RequestConfig): { url: string, request: Request } {
+  get (apiName: string, conf?: RequestConfig): { url: string, request: Request } {
     const apiEndpoint = this.apiUrlDict[apiName].apply(null, (conf || {endpointParams: null}).endpointParams);
     if (!!conf && !!conf.body) {
       apiEndpoint['body'] = conf.body;
@@ -38,6 +38,6 @@ export class ApiResolverService {
     const url = apiEndpoint.url;
     const request = Object.assign({}, apiEndpoint);
     delete request.url;
-    return {url: this.buildUrl(url, (conf || {params: []}).params), request: request};
+    return {url: this.buildUrl(url, (conf || {urlParams: []}).urlParams), request: request};
   }
 }

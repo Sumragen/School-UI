@@ -29,6 +29,7 @@ export class AuthService {
       .map(response => response.json())
       .subscribe(response => {
           const currentUser = response.currentUser;
+          this.securityContext.setSessionID(response.sessionID);
           this.securityContext.setPrincipal(currentUser);
           this.router.navigate(['/home'])
             .catch(err => console.log(err));

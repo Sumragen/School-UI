@@ -1,7 +1,58 @@
 <div class="wrapper">
-  <div class="">
-    <h2 style="background-color: green">
-      user-edit works!
-    </h2>
+  <div style="background-color: white">
+    <div style="padding: 10px 10px 1px 10px;">
+      <h2>Edit page</h2>
+      <!--username-->
+      <form (ngSubmit)="onSubmit()" [formGroup]="userEditForm">
+        <div class="form-group">
+          <label for="username" class="control-label">Username:</label>
+          <input type="text" id="username" class="form-control control-input" formControlName="username">
+          <!--errors-->
+          <span
+            *ngIf="!userEditForm.get('username').valid && userEditForm.get('username').touched"
+            class="help-block">
+              <span *ngIf="userEditForm.get('username').errors['required']">This field is required!</span>
+            </span>
+        </div>
+        <!--first name-->
+        <div class="form-group">
+          <label for="firstName" class="control-label">First name:</label>
+          <input type="text" id="firstName" class="form-control control-input" formControlName="firstName">
+          <!--errors-->
+          <span
+            *ngIf="!userEditForm.get('firstName').valid && userEditForm.get('firstName').touched"
+            class="help-block">
+              <span *ngIf="userEditForm.get('firstName').errors['required']">This field is required!</span>
+            </span>
+        </div>
+
+        <!--last name-->
+        <div class="form-group">
+          <label for="lastName" class="control-label">Last name:</label>
+          <input type="text" id="lastName" class="form-control control-input" formControlName="lastName">
+          <!--errors-->
+          <span
+            *ngIf="!userEditForm.get('lastName').valid && userEditForm.get('lastName').touched"
+            class="help-block">
+              <span *ngIf="userEditForm.get('lastName').errors['required']">This field is required!</span>
+            </span>
+        </div>
+
+        <!--email-->
+        <div class="form-group">
+          <label for="email" class="control-label">Email:</label>
+          <input type="text" id="email" class="form-control control-input" formControlName="email">
+          <!--errors-->
+          <span
+            *ngIf="!userEditForm.get('email').valid && userEditForm.get('email').touched"
+            class="help-block">
+              <span *ngIf="userEditForm.get('email').errors['required']">This field is required!</span>
+            </span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="userEditForm.invalid">Submit</button>
+        <hr>
+      </form>
+    </div>
   </div>
 </div>

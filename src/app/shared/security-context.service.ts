@@ -24,4 +24,11 @@ export class SecurityContextService {
   removePrincipal(): void {
     localStorage.removeItem('currentUser');
   }
+  getSessionID(): string {
+    return localStorage.getItem('sessionID');
+  };
+  setSessionID(id: string): string {
+    localStorage.setItem('sessionID', id);
+    return id;
+  };
 }

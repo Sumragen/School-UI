@@ -7,7 +7,7 @@ import { fadeInAnimation } from '../../shared/animations/fade-in.animation'
 
 @Component({
   selector: 'app-home-page',
-  styles: [],
+  styleUrls: ['./home.component.css'],
   templateUrl: './home.component.html',
   animations: [fadeInAnimation]
 })

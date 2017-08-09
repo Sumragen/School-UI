@@ -63,13 +63,10 @@
         <span *ngIf="registerForm.get('password').errors['required']">
           {{ validationMessages.password.required }}
         </span>
-        <span *ngIf="registerForm.get('password').errors['minlength']">
-          {{ validationMessages.password.minlength }}
-        </span>
         <span *ngIf="registerForm.get('password').errors['maxlength']">
           {{ validationMessages.password.maxlength }}
         </span>
-        <span *ngIf="registerForm.get('password').errors['passwordIncorrect']">
+        <span *ngIf="registerForm.get('password').errors['passwordIncorrect'] && !registerForm.get('password').errors['required']">
           {{ validationMessages.password.passwordIncorrect }}
         </span>
       </div>
@@ -84,7 +81,7 @@
         <span *ngIf="registerForm.get('email').errors['required']">
           {{ validationMessages.email.required }}
         </span>
-        <span *ngIf="registerForm.get('email').errors['email']">
+        <span *ngIf="registerForm.get('email').errors['email'] && !registerForm.get('email').errors['required']">
           {{ validationMessages.email.email }}
         </span>
       </div>

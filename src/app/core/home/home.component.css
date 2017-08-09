@@ -1,4 +1,98 @@
-.bg{
-  height: 100%;
-  background-color: #f2f2f2;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,400,700);
+html, body{
+  height:100%;
+  min-height:100%;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Open Sans Condensed', sans-serif, sans-serif;
+}
+
+.btn{
+  border-radius:0;
+  font-family: 'Open Sans Condensed', sans-serif, sans-serif;
+  margin-bottom:15px;
+}
+
+/* About
+============================================== */
+
+.about {
+  background: url(http://rolyart.ro/wp-content/uploads/2016/07/bg.png) no-repeat top center;
+  background-size: cover;
+  text-align: center;
+  padding: 100px 0;
+  min-height:100%;
+}
+.about .name {
+  font-size: 48px;
+  text-transform: uppercase;
+  margin: 20px 0 0 0;
+}
+
+.about .caption{
+  font-size:16px;
+}
+.about .position {
+  margin: 0;
+}
+.about .location {
+  margin: 5px 0 20px 0;
+}
+.about .slogan {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  font-weight: 700;
+}
+.about p {
+  font-size: 16px;
+}
+.flag {
+  width: 39px;
+  margin: 0 auto;
+}
+
+.title-divider {
+  margin: 0 auto;
+  max-width: 400px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 10px 0;
+}
+.hr-divider {
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  float: left;
+  bottom: -4px;
+}
+.icon-separator {
+  float: left;
+  text-align: center;
+  margin-top: -7px;
+  font-size: 18px;
+  color: #F34336;
+  padding: 0;
+}
+.heading-divider {
+  margin-bottom: 40px;
+  margin-top: 30px;
+  display: flex;
+}
+.heading-divider .title {
+  flex-grow: 0;
+  -webkit-flex-grow: 0;
+  margin: 0 5px 0 0;
+  line-height: 1px;
+}
+.heading-divider .line-separator {
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  height: 6px;
+  position: relative;
+}
+
+.blue-star {
+  color: #337ab7;
 }

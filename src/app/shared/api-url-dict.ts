@@ -12,6 +12,13 @@ const METHODS = {
 
 @Injectable()
 export class ApiUrlDict {
+  getEvents() {
+    return {
+      url: '/events',
+      method: METHODS.GET
+    }
+  };
+
   signIn(): object {
     return {
       url: '/login',

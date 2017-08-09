@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../user.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 export class UserEditComponent implements OnInit {
   @Input() user: User;
   userEditForm: FormGroup;
+  @Output('userEdited') userEdited = new EventEmitter<any>();
 
   constructor(private userService: UserService) {
   }
@@ -30,10 +31,14 @@ export class UserEditComponent implements OnInit {
       .subscribe(
         res => {
           this.user = _.defaults(res, this.user);
-          this.userService.userUpdated.next(this.user);
+          this.emitCancel();
         },
         err => console.log(err)
       );
+  }
+
+  emitCancel() {
+    this.userEdited.next()
   }
 
 }

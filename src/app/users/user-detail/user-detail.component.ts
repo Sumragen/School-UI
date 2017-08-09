@@ -12,17 +12,15 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 })
 export class UserDetailComponent implements OnInit {
   user: User;
+  editMode = false;
 
-  constructor(
-    private userService: UserService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
-    this.getUser(id);
     this.route.params.subscribe(
       (params: Params) => {
         id = params['id'];
@@ -49,5 +47,12 @@ export class UserDetailComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
+  toggleEditMode() {
+    this.editMode = true;
+  }
+  onUserEdit() {
+    this.editMode = false;
   }
 }

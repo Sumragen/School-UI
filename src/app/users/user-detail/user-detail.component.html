@@ -6,6 +6,7 @@
           <span class="glyphicon glyphicon-chevron-left"></span> Back
         </button>
         {{user.firstName}} {{user.lastName}}
+        <button type="button" class="btn btn-primary" *ngIf="!editMode" (click)="toggleEditMode()">Edit</button>
       </h1>
     </div>
   </div>
@@ -33,7 +34,25 @@
     </div>
     <div class="col-sm-10">
       <div class="profile-item">
-        <app-user-edit [user]="user"></app-user-edit>
+        <div *ngIf="editMode; else baseInfo">
+          <app-user-edit [user]="user" (userEdited)="onUserEdit($event)"></app-user-edit>
+        </div>
+        <ng-template #baseInfo><div class="wrapper">
+          <div style="background-color: white;border-radius: 4px;width: 100vh">
+            <div style="padding: 10px 10px 1px 10px;">
+              <div>
+                <label>Username : </label> {{user.username}}
+              </div>
+              <div>
+                <label>First Name : </label> {{user.firstName}}
+              </div>
+              <div>
+                <label>Last Name : </label> {{user.lastName}}
+              </div>
+            </div>
+          </div>
+        </div>
+        </ng-template>
       </div>
     </div>
   </div>

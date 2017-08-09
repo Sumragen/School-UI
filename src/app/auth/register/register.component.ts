@@ -12,28 +12,28 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   validationMessages = {
     username: {
-      required: 'Username is required.',
-      minlength: 'minLength validation',
-      maxlength: 'maxLength validation'
+      required: 'Field "Username" is required.',
+      minlength: 'Username should consist of at least 4 symbols',
+      maxlength: 'Username should consist of at most 36 symbols'
     },
     password: {
-      required: 'Password is required.',
-      minlength: 'minLength validation',
-      maxlength: 'maxLength validation',
-      passwordIncorrect: 'Incorrect password'
+      required: 'Field "Password" is required.',
+      minlength: 'Password should consist of at least 6 symbols',
+      maxlength: 'Password should consist of at most 36 symbols',
+      passwordIncorrect: 'Password must be 6 characters including 1 uppercase letter, 1 lowercase letter, alphanumeric characters'
     },
     first_name: {
-      required: 'First name is required.',
-      minlength: 'minLength validation',
-      maxlength: 'maxLength validation'
+      required: 'Field "First Name" is required.',
+      minlength: 'First Name should consist of at least 3 symbols',
+      maxlength: 'First Name should consist of at most 36 symbols'
     },
     last_name: {
-      required: 'Last name is required.',
-      minlength: 'minLength validation',
-      maxlength: 'maxLength validation'
+      required: 'Field "Last Name" is required.',
+      minlength: 'Last Name should consist of at least 3 symbols',
+      maxlength: 'Last Name should consist of at most 36 symbols'
     },
     email: {
-      required: 'Email is required.',
+      required: 'Field "Email" is required.',
       email: 'Please, set correct Email'
     },
   };
@@ -47,8 +47,8 @@ export class RegisterComponent implements OnInit {
 
   createRegisterForm(): void {
     this.registerForm = new FormGroup({
-      username: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(36)]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(36), this.passwordCheck]),
+      username: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(36)]),
+      password: new FormControl(null, [Validators.required, Validators.maxLength(36), this.passwordCheck]),
       first_name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]),
       last_name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]),
       email: new FormControl(null, [Validators.required, Validators.email])
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
   }
 
   passwordCheck(control: FormControl): { [s: string]: boolean } {
-    const checkRegEx = /^(?=.*?[A-Z])(?=.*?[a-z]).{8,}$/;
+    const checkRegEx = /^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$/;
     if (!checkRegEx.test(control.value)) {
       return {'passwordIncorrect': true};
     }

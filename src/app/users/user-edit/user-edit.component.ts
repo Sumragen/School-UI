@@ -3,6 +3,7 @@ import {User} from '../user.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import * as _ from 'lodash';
+import {SecurityContextService} from '../../shared/security-context.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -14,7 +15,8 @@ export class UserEditComponent implements OnInit {
   userEditForm: FormGroup;
   @Output('userEdited') userEdited = new EventEmitter<any>();
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private securityContext: SecurityContextService) {
   }
 
   ngOnInit() {
@@ -30,11 +32,19 @@ export class UserEditComponent implements OnInit {
     this.userService.updateUser(this.user.id.toString(), _.defaults(this.userEditForm.value, this.user))
       .subscribe(
         res => {
-          this.user = _.defaults(res, this.user);
+          this.updateUserData(res);
           this.emitCancel();
         },
         err => console.log(err)
       );
+  }
+
+  updateUserData(user) {
+    const currentUserId = this.securityContext.getPrincipal().id;
+    this.user = _.defaults(user, this.user);
+    if (this.user.id == currentUserId) {
+      this.securityContext.setPrincipal(this.user);
+    }
   }
 
   emitCancel() {

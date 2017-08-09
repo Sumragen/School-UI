@@ -2,17 +2,26 @@
  * Created by sumragen on 06.07.17.
  */
 import {Injectable} from '@angular/core';
-import {CanActivate} from '@angular/router';
+import {CanActivate, CanActivateChild, Router} from '@angular/router';
 
-import {SecurityContextService} from './security-context.service';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private securityContext: SecurityContextService) {
+export class AuthGuard implements CanActivate, CanActivateChild {
+  constructor(private authService: AuthService,
+              private router: Router) {
 
   }
 
   canActivate() {
-    return !!this.securityContext.getPrincipal();
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      this.router.navigate(['/'])
+    }
+  }
+
+  canActivateChild() {
+    return this.canActivate();
   }
 }

@@ -53,4 +53,8 @@ export class AuthService {
     this.router.navigate(['/'])
       .catch(err => console.log(err));
   }
+
+  isAuthenticated() {
+    return !!this.securityContext.getPrincipal();
+  }
 }

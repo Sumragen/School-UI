@@ -16,10 +16,10 @@ const routes: Routes = [
     path: '', redirectTo: '/login', pathMatch: 'full'
   },
   {
-    path: 'users', loadChildren: './users/users.module#UsersModule'
+    path: 'users', loadChildren: './users/users.module#UsersModule', canActivateChild: [AuthGuard]
   },
   {
-    path: 'events', loadChildren: './events/events.module#EventsModule'
+    path: 'events', loadChildren: './events/events.module#EventsModule', canActivateChild: [AuthGuard]
   }
 ];
 

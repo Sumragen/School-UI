@@ -28,7 +28,7 @@ import {ApiService} from '../shared/api.service';
     BrowserModule,
     AuthRoutingModule
   ],
-  providers: [AuthService, ApiUrlDict, ApiResolverService, ApiService]
+  providers: [ApiUrlDict, ApiResolverService, ApiService]
 })
 
 export class AuthModule {

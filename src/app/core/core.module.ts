@@ -24,9 +24,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     RouterModule,
     BrowserAnimationsModule
   ],
-  providers: [
-    AuthService
-  ],
   exports: [
     HeaderComponent
   ]

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../user.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
 import * as _ from 'lodash';
 import {SecurityContextService} from '../../shared/security-context.service';
@@ -18,18 +18,19 @@ export class UserEditComponent implements OnInit {
   constructor(private userService: UserService,
               private securityContext: SecurityContextService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.userService.getUser(this.route.snapshot.params['id'])
       .subscribe(user => {
         this.user = user;
-        this.userEditForm = new FormGroup({
-          'username': new FormControl(this.user.username || '', [Validators.required]),
-          'firstName': new FormControl(this.user.firstName || null, [Validators.required]),
-          'lastName': new FormControl(this.user.lastName || null, [Validators.required]),
-          'email': new FormControl(this.user.email || null, [Validators.required])
+        this.userEditForm = this.fb.group({
+          'username': [this.user.username || '', [Validators.required]],
+          'firstName': [this.user.firstName || null, [Validators.required]],
+          'lastName': [this.user.lastName || null, [Validators.required]],
+          'email': [this.user.email || null, [Validators.required]]
         });
       });
   }

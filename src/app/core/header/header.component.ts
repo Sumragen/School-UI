@@ -13,13 +13,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css'],
   animations: [
     trigger('sidebar', [
-      state('open', style({
+      state('enter', style({
         transform: 'translateX(0)'
       })),
-      state('close', style({
+      state('leave', style({
         transform: 'translateX(-250px)'
       })),
-      transition('open <=> close', animate('500ms ease-in-out'))
+      transition('enter <=> leave', animate('500ms ease-in-out'))
     ])
   ]
 })
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
 
   logOut(): void {
     this.authService.logOut();
-    this.sidebarState = 'close';
+    this.sidebarState = 'leave';
   }
 
   getUserName(): string {
@@ -51,15 +51,19 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSidebar() {
-    this.sidebarState = this.sidebarState === 'open' ? 'close' : 'open';
+    this.sidebarState = this.sidebarState === 'enter' ? 'leave' : 'enter';
   }
 
   goTo(path: string, params: string[]) {
     this.router.navigate([path].concat(params || []));
-    this.sidebarState = 'close';
+    this.sidebarState = 'leave';
+  }
+
+  onDetectMousePosition(state: string) {
+    this.sidebarState = state;
   }
 
   ngOnInit() {
-    this.sidebarState = 'close';
+    this.sidebarState = 'leave';
   }
 }

@@ -12,11 +12,13 @@ import {BsDropdownModule} from "ngx-bootstrap";
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToggleDisplayDirective} from './header/toggle-display.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    ToggleDisplayDirective
   ],
   imports: [
     CommonModule,

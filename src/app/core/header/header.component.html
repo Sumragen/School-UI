@@ -1,6 +1,6 @@
 <!--TODO: add directive to toggle sidebar dynamic-->
 <div id="wrapper">
-  <div *ngIf="isLoggedIn()">
+  <div *ngIf="isLoggedIn()" appToggleDisplay (detectMousePosition)="onDetectMousePosition($event)">
     <div id="sidebar-wrapper" [@sidebar]="sidebarState">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
@@ -25,7 +25,7 @@
 
     <div class="toggle-button" [@sidebar]="sidebarState" (click)="toggleSidebar()" style="z-index: 100;">
       <span class="glyphicon toggle-icon"
-            [ngClass]="{'glyphicon-chevron-left': sidebarState==='open','glyphicon-chevron-right': sidebarState==='close'}"></span>
+            [ngClass]="{'glyphicon-chevron-left': sidebarState==='enter','glyphicon-chevron-right': sidebarState==='leave'}"></span>
     </div>
   </div>
 

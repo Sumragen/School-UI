@@ -7,6 +7,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './core/home/home.component';
 
 import {AuthGuard} from './shared/auth-guard.service';
+import {UserNotFoundComponent} from './users/user-not-found/user-not-found.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'events', loadChildren: './events/events.module#EventsModule', canActivateChild: [AuthGuard]
-  }
+  },
+  {path: 'user-not-found', component: UserNotFoundComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

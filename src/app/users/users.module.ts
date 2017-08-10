@@ -13,13 +13,15 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import {UsersRoutingModule} from './users-routing.module';
 import {UserItemComponent} from './user-list/user-item/user-item.component';
+import { UserNotFoundComponent } from './user-not-found/user-not-found.component';
 
 @NgModule({
   declarations: [
     UserItemComponent,
     UserListComponent,
     UserEditComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    UserNotFoundComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 /**
  * Created by sumragen on 06.07.17.
  */
-import {animate, Component, OnInit, state, style, transition, trigger} from '@angular/core';
+import {animate, Component, HostBinding, OnInit, state, style, transition, trigger} from '@angular/core';
 
 import {AuthService} from '../../auth/auth.service';
 import {SecurityContextService} from '../../shared/security-context.service';
@@ -23,14 +23,12 @@ import {Router} from '@angular/router';
     ])
   ]
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   sidebarState: string;
 
-  constructor(
-    private securityContext: SecurityContextService,
-    private authService: AuthService,
-    private router: Router
-  ) {
+  constructor(private securityContext: SecurityContextService,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   isLoggedIn(): boolean {
@@ -47,12 +45,17 @@ export class HeaderComponent implements OnInit{
     return user.firstName + ' ' + user.lastName;
   }
 
+  getUserId() {
+    const user = this.securityContext.getPrincipal();
+    return user.id;
+  }
+
   toggleSidebar() {
     this.sidebarState = this.sidebarState === 'open' ? 'close' : 'open';
   }
 
-  goTo(path: string) {
-    this.router.navigate([path]);
+  goTo(path: string, params: string[]) {
+    this.router.navigate([path].concat(params || []));
     this.sidebarState = 'close';
   }
 

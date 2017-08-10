@@ -1,19 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {UserListComponent} from './user-list/user-list.component';
-import {IsLoggedOut} from '../shared/is-logged-out.service';
 import {UserDetailComponent} from './user-detail/user-detail.component';
-import {AuthGuard} from '../shared/auth-guard.service';
+import {UserEditComponent} from './user-edit/user-edit.component';
+import {UserNotFoundComponent} from './user-not-found/user-not-found.component';
 
 const UsersRoutes: Routes = [
-    {
-      path: '', component: UserListComponent
-    },
-    {
-      path: ':id', component: UserDetailComponent
-    }
-  ]
-;
+  {path: '', component: UserListComponent},
+  {path: ':id', component: UserDetailComponent},
+  {path: ':id/edit', component: UserEditComponent}
+];
 
 @NgModule({
   imports: [

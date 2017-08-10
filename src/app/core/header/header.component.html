@@ -4,7 +4,7 @@
     <div id="sidebar-wrapper" [@sidebar]="sidebarState">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
-          <a>
+          <a (click)="goTo('/users', [getUserId()])">
             {{getUserName()}}
           </a>
         </li>
@@ -23,8 +23,9 @@
       </ul>
     </div>
 
-    <div class="toggle-button" [@sidebar]="sidebarState" (click)="toggleSidebar()">
-      <span class="glyphicon toggle-icon" [ngClass]="{'glyphicon-chevron-left': sidebarState==='open','glyphicon-chevron-right': sidebarState==='close'}"></span>
+    <div class="toggle-button" [@sidebar]="sidebarState" (click)="toggleSidebar()" style="z-index: 100;">
+      <span class="glyphicon toggle-icon"
+            [ngClass]="{'glyphicon-chevron-left': sidebarState==='open','glyphicon-chevron-right': sidebarState==='close'}"></span>
     </div>
   </div>
 

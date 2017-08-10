@@ -22,7 +22,13 @@
         </span>
       </div>
     </div>
-
+    <div *ngIf="!!authErrorCode" class="help-block">
+      <div [ngSwitch]="authErrorCode">
+        <span *ngSwitchCase="404">Login or Password is incorrect</span>
+        <span *ngSwitchCase="500">Some problems with server. Please, try again later.</span>
+        <span *ngSwitchDefault>Something went wrong. Please, try again later.</span>
+      </div>
+    </div>
     <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Submit</button>
   </form>
   <div class="sign-up-container">

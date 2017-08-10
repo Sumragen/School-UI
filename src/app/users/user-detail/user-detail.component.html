@@ -1,59 +1,67 @@
-<div class="container" [@fadeInAnimation] *ngIf="user">
+<div class="mainbody container-fluid" [@fadeInAnimation] *ngIf="user">
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">
-        <button class="btn btn-link" (click)="goBack()">
-          <span class="glyphicon glyphicon-chevron-left"></span> Back
-        </button>
-        {{user.firstName}} {{user.lastName}}
-        <button type="button" class="btn btn-primary" *ngIf="!editMode" (click)="toggleEditMode()">Edit</button>
-      </h1>
-    </div>
-  </div>
-
-  <div class="col-sm-8 col-md-12">
-    <div class="col-sm-2">
-      <!--profile avatar-->
-      <div class="row profile-item">
-        <div class="profile-avatar-wrapper">
-          <div class="profile-avatar-box">
-            <img class="img-responsive"
-                 [src]="user.avatar || 'https://d3txbfmby5lf7l.cloudfront.net/assets/default-user-avatar-57012e2942.svg'"
-                 alt="{{user.username}}">
-            <div class="profile-avatar-info-box">
-              <p>
-                Size: some_size
-              </p>
-              <p>
-                Type: some_type
-              </p>
+    <button class="btn btn-link" style="position: absolute" (click)="goBack()">
+      <span class="glyphicon glyphicon-chevron-left"></span> User List
+    </button>
+    <div style="padding-top:50px;"> </div>
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="media">
+            <div align="center">
+              <img class="thumbnail img-responsive"
+                   [src]="'https://d3txbfmby5lf7l.cloudfront.net/assets/default-user-avatar-57012e2942.svg'"
+                   width="300px"
+                   height="300px" [alt]="user.username">
+            </div>
+            <div class="media-body">
+              <hr>
+              <h3><strong>Bio</strong></h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices
+                sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+              <hr>
+              <h3><strong>Location</strong></h3>
+              <p>Earth</p>
+              <hr>
+              <h3><strong>Gender</strong></h3>
+              <p>Unknown</p>
+              <hr>
+              <h3><strong>Birthday</strong></h3>
+              <p>January 01 1901</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-10">
-      <div class="profile-item">
-        <div *ngIf="editMode; else baseInfo">
-          <app-user-edit [user]="user" (userEdited)="onUserEdit($event)"></app-user-edit>
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <span>
+            <h1 class="panel-title pull-left" style="font-size:30px;">
+              {{user.firstName}} {{user.lastName}} <small>{{user.email}}</small>
+              <button type="button" class="btn btn-link" (click)="toggleEditMode()">
+                <span class="glyphicon glyphicon-pencil"></span> Edit
+              </button>
+            </h1>
+          </span>
+          <br><br>
+          <i class="fa fa-tags" aria-hidden="true"></i> <a href="/tags/diaspora" class="tag">#{{user.username}}</a>
+          <br><br>
+          <hr>
+          <span class="pull-left">
+                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o"
+                                                                                          aria-hidden="true"></i> Action</a>
+                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-picture-o"
+                                                                                          aria-hidden="true"></i> Button <span
+                          class="badge">25</span></a>
+                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users"
+                                                                                          aria-hidden="true"></i> List <span
+                          class="badge">42</span></a>
+                    </span>
         </div>
-        <ng-template #baseInfo><div class="wrapper">
-          <div style="background-color: white;border-radius: 4px;width: 100vh">
-            <div style="padding: 10px 10px 1px 10px;">
-              <div>
-                <label>Username : </label> {{user.username}}
-              </div>
-              <div>
-                <label>First Name : </label> {{user.firstName}}
-              </div>
-              <div>
-                <label>Last Name : </label> {{user.lastName}}
-              </div>
-            </div>
-          </div>
-        </div>
-        </ng-template>
       </div>
+      <hr>
     </div>
   </div>
 </div>
+

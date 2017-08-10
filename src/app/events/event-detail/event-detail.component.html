@@ -1,3 +1,24 @@
-<p>
-  event-detail works!
-</p>
+<div class="container bg" [@fadeInAnimation] *ngIf="event">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">
+        <button type="button" class="btn btn-link" (click)="goBack()">
+          <span class="glyphicon glyphicon-chevron-left"></span> Back
+        </button>
+        {{event.name}}
+        <button type="button"  class="btn btn-link" (click)="toggleEditMode()">
+          <span class="glyphicon glyphicon-pencil"></span> edit
+        </button>
+      </h1>
+    </div>
+  </div>
+  <div>
+    <label>Address : </label> {{event.address.country}} {{event.address.city}}
+  </div>
+  <div>
+    <label>Location : </label> lat:{{event.location.latitude}}; lng:{{event.location.longitude}}
+  </div>
+  <div>
+    <label>Description : </label> {{event.description}}
+  </div>
+</div>

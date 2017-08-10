@@ -23,19 +23,22 @@ export class AuthService {
               private securityContext: SecurityContextService) {
   };
 
-  signIn(user: LoginDto): void {
-    const endpoint = this.apiResolverService.get('signIn', {body: user});
-    this.apiService.request(endpoint.url, endpoint.request)
-      .map(response => response.json())
-      .subscribe(response => {
-          const currentUser = response.currentUser;
-          this.securityContext.setSessionID(response.sessionID);
-          this.securityContext.setPrincipal(currentUser);
-          this.router.navigate(['/home'])
-            .catch(err => console.log(err));
-        },
-        // TODO: display error message via notification service
-        error => console.log(error))
+  signIn(user: LoginDto) {
+    return new Promise((resolve, reject) => {
+      const endpoint = this.apiResolverService.get('signIn', {body: user});
+      this.apiService.request(endpoint.url, endpoint.request)
+        .map(response => response.json())
+        .subscribe(response => {
+            const currentUser = response.currentUser;
+            this.securityContext.setSessionID(response.sessionID);
+            this.securityContext.setPrincipal(currentUser);
+            this.router.navigate(['/home'])
+              .then(() => null)
+              .catch(error => reject(error));
+          },
+          // TODO: display error message via notification service
+          error => reject(error))
+    });
   }
 
   signUp(data: RegisterDto): void {

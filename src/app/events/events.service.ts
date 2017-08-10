@@ -12,4 +12,10 @@ export class EventsService {
     return this.apiService.request(endpoint.url, endpoint.request)
       .map((res) => res.json())
   }
+
+  getEvent(id: string) {
+    const endpoint = this.apiResolver.get('getEvent', {endpointParams: [id]});
+    return this.apiService.request(endpoint.url, endpoint.request)
+      .map((res) => res.json())
+  }
 }

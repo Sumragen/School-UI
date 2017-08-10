@@ -3,6 +3,7 @@ import {fadeInAnimation} from '../../shared/animations/fade-in.animation';
 import {UserService} from '../user.service';
 import {User} from '../user.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-user-detail',
@@ -12,7 +13,6 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 })
 export class UserDetailComponent implements OnInit {
   user: User;
-  editMode = false;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -41,6 +41,9 @@ export class UserDetailComponent implements OnInit {
       .subscribe(
         (response: User) => {
           this.user = response;
+        },
+        err => {
+          this.router.navigate(['user-not-found'])
         }
       )
   }
@@ -50,9 +53,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   toggleEditMode() {
-    this.editMode = true;
-  }
-  onUserEdit() {
-    this.editMode = false;
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 }

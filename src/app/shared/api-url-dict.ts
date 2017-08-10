@@ -19,6 +19,13 @@ export class ApiUrlDict {
     }
   };
 
+  getEvent(id: string): object {
+    return {
+      method: METHODS.GET,
+      url: '/event/' + id
+    }
+  };
+
   signIn(): object {
     return {
       url: '/login',

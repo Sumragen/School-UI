@@ -2,9 +2,16 @@
  * Created by sumragen on 04.07.17.
  */
 export class Event {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
+  _id: number;
+  name: string;
+  date: Date;
+  description: string;
+  address: {
+    city: string;
+    country: string;
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+  }
 }

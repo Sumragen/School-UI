@@ -1,7 +1,7 @@
 /**
  * Created by sumragen on 04.07.17.
  */
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../auth.service';
@@ -14,8 +14,9 @@ import {LoginDto} from '../login-dto.model';
   templateUrl: './login.component.html'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   user: LoginDto;
+  authErrorCode: number = null;
   loginForm: FormGroup = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
@@ -32,7 +33,13 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private fb: FormBuilder) { }
 
+  ngOnInit() {
+    this.loginForm.valueChanges
+      .subscribe(() => this.authErrorCode = null);
+  }
+
   signIn(): void {
-    this.authService.signIn(this.loginForm.value);
+    this.authService.signIn(this.loginForm.value)
+      .catch(err => this.authErrorCode = err.status)
   }
 }

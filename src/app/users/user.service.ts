@@ -6,13 +6,13 @@ import {Observable} from 'rxjs/Observable';
 
 import {User} from './user.model';
 import {Subject} from 'rxjs/Subject';
-import {AlternativeApiService} from '../shared/alternative-api.service';
+import {ApiService} from '../shared/api.service';
 
 @Injectable()
 export class UserService {
   userUpdated = new Subject<any>();
 
-  constructor(private alterApiService: AlternativeApiService) {
+  constructor(private alterApiService: ApiService) {
   }
 
   getUsers(offset?: number | string, limit?: number | string): Observable<any> {

@@ -10,9 +10,6 @@ import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {AuthRoutingModule} from './auth-routing.module';
-import {ApiUrlDict} from '../shared/api-url-dict';
-import {ApiResolverService} from '../shared/api-resolver.service';
-import {ApiService} from '../shared/api.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +23,7 @@ import {ApiService} from '../shared/api.service';
     BrowserModule,
     AuthRoutingModule
   ],
-  providers: [ApiUrlDict, ApiResolverService, ApiService]
+  providers: []
 })
 
 export class AuthModule {

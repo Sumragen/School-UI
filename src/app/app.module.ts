@@ -16,7 +16,7 @@ import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {UsersModule} from './users/users.module';
 import {AuthService} from './auth/auth.service';
-import {AlternativeApiService} from './shared/alternative-api.service';
+import {ApiService} from './shared/api.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import {AlternativeApiService} from './shared/alternative-api.service';
     SharedModule,
     UsersModule
   ],
-  providers: [SecurityContextService, AuthService, AlternativeApiService],
+  providers: [SecurityContextService, AuthService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

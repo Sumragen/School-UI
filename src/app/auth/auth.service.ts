@@ -7,31 +7,25 @@ import {Router} from '@angular/router';
 import 'rxjs/add/operator/toPromise'
 import 'rxjs/add/operator/map'
 
-import {SecurityContextService} from '../shared/security-context.service';
-import {ApiService} from '../shared/api.service';
-import {ApiResolverService} from '../shared/api-resolver.service';
-
 import {LoginDto} from './login-dto.model';
 import {RegisterDto} from './register-dto.model';
+import {SecurityContextService} from '../shared/security-context.service';
+import {AlternativeApiService} from '../shared/alternative-api.service';
 
 @Injectable()
 export class AuthService {
 
   constructor(private router: Router,
-              private apiService: ApiService,
-              private apiResolverService: ApiResolverService,
+              private alternativeApiService: AlternativeApiService,
               private securityContext: SecurityContextService) {
   };
 
   signIn(user: LoginDto) {
     return new Promise((resolve, reject) => {
-      const endpoint = this.apiResolverService.get('signIn', {body: user});
-      this.apiService.request(endpoint.url, endpoint.request)
-        .map(response => response.json())
+      this.alternativeApiService.signIn(user)
         .subscribe(response => {
-            const currentUser = response.currentUser;
             this.securityContext.setSessionID(response.sessionID);
-            this.securityContext.setPrincipal(currentUser);
+            this.securityContext.setPrincipal(response.currentUser);
             this.router.navigate(['/home'])
               .then(() => null)
               .catch(error => reject(error));
@@ -42,10 +36,8 @@ export class AuthService {
   }
 
   signUp(data: RegisterDto): void {
-    const endpoint = this.apiResolverService.get('register', {body: data});
-    this.apiService.request(endpoint.url, endpoint.request)
-      .map(response => response.json())
-      .subscribe(response => {
+    this.alternativeApiService.register(data)
+      .subscribe(() => {
         this.router.navigate(['/'])
           .catch(err => console.log(err));
       })

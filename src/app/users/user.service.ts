@@ -2,39 +2,32 @@
  * Created by sumragen on 07.07.17.
  */
 import {Injectable} from '@angular/core';
-
-import {ApiResolverService} from '../shared/api-resolver.service';
-import {ApiService} from '../shared/api.service';
 import {Observable} from 'rxjs/Observable';
+
 import {User} from './user.model';
 import {Subject} from 'rxjs/Subject';
+import {AlternativeApiService} from '../shared/alternative-api.service';
 
 @Injectable()
 export class UserService {
   userUpdated = new Subject<any>();
 
-  constructor(private apiService: ApiService,
-              private apiResolver: ApiResolverService) {
+  constructor(private alterApiService: AlternativeApiService) {
   }
 
-  getUsers(offset?: string, limit?: string): Observable<any> {
-    const endpoint = this.apiResolver.get('getUsers'); // endpointParams: [offset, limit] <-- additional params (pagination)
-    return this.apiService.request(endpoint.url, endpoint.request)
-      .map(res => res.json());
+  getUsers(offset?: number | string, limit?: number | string): Observable<any> {
+    return this.alterApiService.getUsers(offset, limit);
   }
 
-  getUser(id: string): Observable<any> {
-    const endpoint = this.apiResolver.get('getUser', {endpointParams: [id]});
-    return this.apiService.request(endpoint.url, endpoint.request)
-      .map(res => res.json());
+  getUser(id: number | string): Observable<any> {
+    return this.alterApiService.getUser(id);
   }
 
-  updateUser(id: string, user: User): Observable<any> {
-    const endpoint = this.apiResolver.get('updateUser', {body: user, endpointParams: [id]});
-    return this.apiService.request(endpoint.url, endpoint.request)
-      .map(res => {
+  updateUser(id: number | string, user: User): Observable<any> {
+   return this.alterApiService.updateUser(id, user)
+      .map((res) => {
         this.userUpdated.next();
-        return res.json()
+        return res;
       });
   }
 }

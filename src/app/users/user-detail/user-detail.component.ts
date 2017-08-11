@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+
 import {fadeInAnimation} from '../../shared/animations/fade-in.animation';
 import {UserService} from '../user.service';
 import {User} from '../user.model';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-user-detail',
@@ -11,8 +12,9 @@ import {Location} from '@angular/common';
   styleUrls: ['./user-detail.component.css'],
   animations: [fadeInAnimation]
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
   user: User;
+  userUpdateSubscription: Subscription;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -27,7 +29,7 @@ export class UserDetailComponent implements OnInit {
         this.getUser(id);
       }
     );
-    this.userService.userUpdated
+    this.userUpdateSubscription = this.userService.userUpdated
       .subscribe(
         () => {
           this.userService.getUser(this.user.id.toString())
@@ -54,5 +56,9 @@ export class UserDetailComponent implements OnInit {
 
   toggleEditMode() {
     this.router.navigate(['edit'], {relativeTo: this.route});
+  }
+
+  ngOnDestroy() {
+    this.userUpdateSubscription.unsubscribe();
   }
 }

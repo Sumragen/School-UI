@@ -1,15 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
-import {IsLoggedIn} from '../shared/is-logged-in.service';
 import {RegisterComponent} from './register/register.component';
+import {AnonymousGuardService} from '../shared/anonymous-guard.service';
+import {IsLoggedIn} from '../shared/is-logged-in.service';
 
 const authRoutes: Routes = [
   {
-    path: 'login', component: LoginComponent, resolve: [IsLoggedIn],
+    path: 'login', component: LoginComponent, canActivate: [AnonymousGuardService]
   },
   {
-    path: 'register', component: RegisterComponent, resolve: [IsLoggedIn],
+    path: 'register', component: RegisterComponent, canActivate: [AnonymousGuardService]
   }
 ];
 
@@ -21,7 +22,8 @@ const authRoutes: Routes = [
     RouterModule
   ],
   providers: [
-    IsLoggedIn
+    IsLoggedIn,
+    AnonymousGuardService
   ]
 })
 export class AuthRoutingModule {

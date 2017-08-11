@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
+
 import {RouterModule, Routes} from '@angular/router';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {UserEditComponent} from './user-edit/user-edit.component';
-import {UserNotFoundComponent} from './user-not-found/user-not-found.component';
 
 const UsersRoutes: Routes = [
   {path: '', component: UserListComponent},

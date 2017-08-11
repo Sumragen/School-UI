@@ -13,6 +13,7 @@ import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToggleDisplayDirective} from './header/toggle-display.directive';
+import {CoreRoutingModule} from './core-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ToggleDisplayDirective} from './header/toggle-display.directive';
     CommonModule,
     BsDropdownModule,
     RouterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CoreRoutingModule
   ],
   exports: [
     HeaderComponent

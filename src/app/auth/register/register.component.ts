@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -46,12 +45,12 @@ export class RegisterComponent implements OnInit {
   }
 
   createRegisterForm(): void {
-    this.registerForm = new FormGroup({
-      username: new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(36)]),
-      password: new FormControl(null, [Validators.required, Validators.maxLength(36), this.passwordCheck]),
-      first_name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]),
-      last_name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]),
-      email: new FormControl(null, [Validators.required, Validators.email])
+    this.registerForm = this.fb.group({
+      'username': [null, [Validators.required, Validators.minLength(4), Validators.maxLength(36)]],
+      'password': [null, [Validators.required, Validators.maxLength(36), this.passwordCheck]],
+      'first_name': [null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]],
+      'last_name': [null, [Validators.required, Validators.minLength(3), Validators.maxLength(36)]],
+      'email': [null, [Validators.required, Validators.email]]
     });
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {UserService} from '../user.service';
 import {User} from '../user.model';
 import {fadeInAnimation} from '../../shared/animations/fade-in.animation';

@@ -5,7 +5,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../auth.service';
-
 import {LoginDto} from '../login-dto.model';
 
 @Component({

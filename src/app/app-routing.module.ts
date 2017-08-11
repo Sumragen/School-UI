@@ -11,18 +11,25 @@ import {UserNotFoundComponent} from './users/user-not-found/user-not-found.compo
 
 const routes: Routes = [
   {
-    path: 'home', canActivate: [AuthGuard], component: HomeComponent,
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
   },
   {
-    path: '', redirectTo: '/login', pathMatch: 'full'
+    path: 'users',
+    loadChildren: './users/users.module#UsersModule',
+    canActivateChild: [AuthGuard]
   },
   {
-    path: 'users', loadChildren: './users/users.module#UsersModule', canActivateChild: [AuthGuard]
+    path: 'events',
+    loadChildren: './events/events.module#EventsModule',
+    canActivateChild: [AuthGuard]
   },
   {
-    path: 'events', loadChildren: './events/events.module#EventsModule', canActivateChild: [AuthGuard]
-  },
-  {path: 'user-not-found', component: UserNotFoundComponent, canActivate: [AuthGuard]}
+    path: 'user-not-found',
+    component: UserNotFoundComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

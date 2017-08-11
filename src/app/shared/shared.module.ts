@@ -3,7 +3,6 @@
  */
 import {NgModule} from '@angular/core';
 import {DropdownDirective} from './dropdown.directive';
-import {DateFormatPipe} from './date-format.pipe';
 
 @NgModule({
   declarations: [

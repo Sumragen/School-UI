@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {User} from '../user.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../user.service';
-import * as _ from 'lodash';
-import {SecurityContextService} from '../../shared/security-context.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import * as _ from 'lodash';
+
+import {SecurityContextService} from '../../shared/security-context.service';
+import {UserService} from '../user.service';
+import {User} from '../user.model';
 
 @Component({
   selector: 'app-user-edit',
@@ -36,7 +37,7 @@ export class UserEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.updateUser(this.user.id.toString(), _.defaults(this.userEditForm.value, this.user))
+    this.userService.updateUser(this.user.id, _.defaults(this.userEditForm.value, this.user))
       .subscribe(
         res => {
           this.updateUserData(res);
@@ -49,7 +50,7 @@ export class UserEditComponent implements OnInit {
   updateUserData(user) {
     const currentUserId = this.securityContext.getPrincipal().id;
     this.user = _.defaults(user, this.user);
-    if (this.user.id == currentUserId) {
+    if (this.user.id === currentUserId) {
       this.securityContext.setPrincipal(this.user);
     }
   }

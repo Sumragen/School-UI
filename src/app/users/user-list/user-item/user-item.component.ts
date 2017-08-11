@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+
 import {User} from '../../user.model';
 import {UserService} from '../../user.service';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-user-item',

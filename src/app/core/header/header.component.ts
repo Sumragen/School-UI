@@ -1,7 +1,7 @@
 /**
  * Created by sumragen on 06.07.17.
  */
-import {animate, Component, HostBinding, OnInit, state, style, transition, trigger} from '@angular/core';
+import {animate, Component, OnInit, state, style, transition, trigger} from '@angular/core';
 
 import {AuthService} from '../../auth/auth.service';
 import {SecurityContextService} from '../../shared/security-context.service';

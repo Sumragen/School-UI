@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class DateFormatPipe implements PipeTransform {
   transform(value: any) {
-    if (value.length === 0) {
+    if (!value) {
       return value;
     }
     return new Date(value).toDateString()
